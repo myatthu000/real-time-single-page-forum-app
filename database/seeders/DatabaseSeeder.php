@@ -8,6 +8,8 @@ use App\Models\Question;
 use App\Models\Reply;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use function Symfony\Component\String\truncate;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,8 +18,18 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
+
+
     public function run()
     {
+
+//        User::query()->truncate();
+//        Question::query()->truncate();
+//        Category::query()->truncate();
+//        Reply::query()->truncate();
+
+
         User::factory(10)->create();
         Category::factory(5)->create();
         Question::factory(10)->create();

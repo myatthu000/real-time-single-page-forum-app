@@ -20,7 +20,7 @@ class QuestionFactory extends Factory
         $title = $this->faker->title;
         return [
             'title' => $title,
-            'slug' => Str::slug($title),
+            'slug' => Str::of($title)->slug('-'),
             'body' => $this->faker->sentence,
             'category_id' => function(){
                 return Category::all()->random();
