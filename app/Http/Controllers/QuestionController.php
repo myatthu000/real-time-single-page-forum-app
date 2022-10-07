@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,21 +32,13 @@ class QuestionController extends Controller
     {
 
 //        auth()->user()->question()->create($request->all());
-        Question::query()->create($request->all());
-        return \response('Created',Response::HTTP_CREATED);
-
 //        Question::query()->create($request->only([
 //            'title','slug', 'body','category_id','user_id'
 //        ]));
+        Question::query()->create($request->all());
+        return \response('Created',Response::HTTP_CREATED);
 
 
-//        $question = new Question();
-//        $question->title = $request->title;
-//        $question->slug = Str::of($question->title)->slug('-');
-//        $question->body = $request->body;
-//        $question->category_id = $request->category_id;
-//        $question->user_id = $request->user_id;
-//        $question->saveOrFail();
 
     }
 
@@ -70,7 +63,16 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+
+//        $question->title = $request->title;
+//        $question->slug = Str::of($question->title)->slug('-');
+//        $question->body = $request->body;
+//        $question->category_id = $request->category_id;
+//        $question->user_id = $request->user_id;
+//        $question->updateOrFail();
+
+        $question->update($request->all());
+        return \response("Updated",Response::HTTP_ACCEPTED);
     }
 
     /**

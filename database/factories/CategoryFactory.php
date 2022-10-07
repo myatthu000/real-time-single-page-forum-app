@@ -17,7 +17,7 @@ class CategoryFactory extends Factory
         $word =  $this->faker->word;
         return [
             'name' => $word,
-            'slug' => Str::slug($word),
+            'slug' => Str::of($word)->slug("-"),
         ];
     }
 }

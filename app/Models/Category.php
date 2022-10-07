@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    protected $guarded = []; //allow mass assigment
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
