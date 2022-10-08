@@ -9,6 +9,8 @@ class Reply extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function question()
     {
         // Every reply is under some question

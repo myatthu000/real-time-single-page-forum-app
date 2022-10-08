@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,11 +15,13 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Builder[]|Collection
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        return Category::query()->latest()->get();
+        return CategoryResource::collection(Category::query()->latest()->get());
+
+//        return Category::query()->latest()->get();
     }
 
 
@@ -42,11 +45,11 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param Category $category
-     * @return Category
+     * @return CategoryResource
      */
     public function show(Category $category)
     {
-        return $category;
+        return new CategoryResource($category);
     }
 
 

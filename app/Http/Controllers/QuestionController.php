@@ -72,7 +72,7 @@ class QuestionController extends Controller
 //        $question->updateOrFail();
 
         $question->update($request->all());
-        return \response("Updated",Response::HTTP_ACCEPTED);
+        return response("Updated",Response::HTTP_ACCEPTED);
     }
 
     /**
