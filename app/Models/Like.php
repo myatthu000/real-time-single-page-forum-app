@@ -9,5 +9,6 @@ class Like extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
 
 }
