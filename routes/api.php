@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\LikeController;
@@ -19,3 +20,18 @@ Route::apiResource("/question/{question}/reply", ReplyController::class);
 
 Route::post('/like/{reply}', [LikeController::class,'likeIt']);
 Route::delete('/like/{reply}', [LikeController::class,'unlikeIt']);
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function () {
+
+    Route::post('login', [AuthController::class,'login']);
+    Route::post('signUp', [AuthController::class,'signUp']);
+    Route::post('logout', [AuthController::class,'logout']);
+    Route::post('refresh', [AuthController::class,'refresh']);
+    Route::post('me', [AuthController::class,'me']);
+
+});

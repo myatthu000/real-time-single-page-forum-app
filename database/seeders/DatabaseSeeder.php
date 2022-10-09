@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 //        Reply::query()->truncate();
 
 
-        User::factory(10)->create();
+        User::factory(5)->create();
         Category::factory(5)->create();
         Question::factory(10)->create();
 
