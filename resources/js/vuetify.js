@@ -1,23 +1,7 @@
-require('./bootstrap');
-
-const feather = require('feather-icons')
-
-feather.replace();
-
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 Vue.use(Vuetify)
-
-//. Vue.component('test-component',require('./components/TestComponent.vue').default);
-Vue.component('app-home',require('./components/AppHome.vue').default);
-
-import router from './Router/router.js'
-const app = new Vue({
-    vuetify : new Vuetify(),
-    el: "#app",
-    router
-})
 
 export default new Vuetify({
     theme: {
