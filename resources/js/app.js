@@ -7,7 +7,13 @@ feather.replace();
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+
+
 Vue.use(Vuetify)
+
+
+import User from "./components/Helpers/User";
+window.User = User
 
 
 Vue.component('app-home',require('./components/AppHome.vue').default);
@@ -16,7 +22,7 @@ import router from './Router/router.js'
 const app = new Vue({
     vuetify : new Vuetify(),
     el: "#app",
-    router
+    router,
 })
 
 
