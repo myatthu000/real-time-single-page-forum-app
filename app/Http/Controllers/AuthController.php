@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SignupRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +30,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -39,10 +40,11 @@ class AuthController extends Controller
     /**
      *
      *
+     * @param SignupRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function signUp(Request $request)
+    public function signUp(SignupRequest $request)
     {
         User::query()->create($request->all());
 

@@ -4,16 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
 
 class Question extends Model
 {
     use HasFactory;
 
 
-//    protected $fillable = ['title','slug','body','category_id','user_id'];
+   protected $fillable = ['title','slug','body','category_id','user_id'];
 
-    protected $guarded = [];
+    // protected $guarded = [];
 
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function($question){
+            $question->slug = Str::of($question->title)->slug("-");
+        });
+    }
 
     public function getRouteKeyName()
     {
@@ -37,7 +47,7 @@ class Question extends Model
 
     public function getPathAttribute()
     {
-        return asset("api/question/$this->slug");
+        return "/question/$this->slug";
     }
 
 }

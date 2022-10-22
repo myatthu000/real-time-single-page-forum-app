@@ -11,11 +11,12 @@ class AppStorage {
     store(user,token){
         this.storeToken(token);
         this.storeUser(user);
+        console.log("Store work")
     }
 
     clear(){
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
     }
 
     getToken(){

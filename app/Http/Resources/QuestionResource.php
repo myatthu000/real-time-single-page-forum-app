@@ -15,8 +15,9 @@ class QuestionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'user_id' => $this->user->id,
             'title' => $this->title,
+            'slug' => $this->slug,
 //            'path' => asset("api/question/$this->slug"),
             'path' => $this->path,
             'body' => $this->body,

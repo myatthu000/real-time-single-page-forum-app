@@ -1,9 +1,9 @@
 <template>
     <div>
         <Toolbar></Toolbar>
-        <v-container class="my-2 grey lighten-1" >
+        <div class="my-2" >
             <router-view></router-view>
-        </v-container>
+        </div>
         <app-footer></app-footer>
     </div>
 </template>
