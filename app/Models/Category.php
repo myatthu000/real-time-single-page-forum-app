@@ -9,6 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    // protected $fillable = ['name'];
+
     protected $guarded = []; //allow mass assigment
 
     public function getRouteKeyName()

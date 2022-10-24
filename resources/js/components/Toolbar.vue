@@ -8,9 +8,9 @@
 
         <div class="hidden-sm-and-down">
             <router-link
+                v-if='item.show'
                 v-for="item in items"
                 :key="item.title"
-                v-if='item.show'
                 :to="item.to">
                 <v-btn text>{{item.title}}</v-btn>
             </router-link>
@@ -52,7 +52,7 @@ import User from './Helpers/User';
                 items: [
                     {title:'Forum', to:'/forum', show:true},
                     {title:'Ask Question', to:'/askQuestion', show:User.loggedIn()},
-                    {title:'Category', to:'/category', show:User.loggedIn()},
+                    {title:'Category', to:'/category', show:User.admin()},
                     {title:'SignUp', to:'/signup', show:!User.loggedIn()},
                     {title:'Logout', to:'/logout', show:User.loggedIn()},
                     {title:'Login', to:'/login', show:!User.loggedIn()},

@@ -51,7 +51,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->slug = Str::of($category->name)->slug("-");
         $category->saveOrFail();
-        return response("Created",Response::HTTP_CREATED);
+        return response(new CategoryResource($category),Response::HTTP_CREATED);
     }
 
     /**
@@ -78,13 +78,13 @@ class CategoryController extends Controller
         $category->updateOrFail(
             [
                 'name' => $request->name,
-                'slug'=>Str::of($request->name)->slug("-")
+                'slug'=>Str::of($request->name)->slug("-"),
             ]
         );
 //        $category->name = $request->name;
 //        $category->slug = Str::of($category->name)->slug("-");
 //        $category->saveOrFail();
-        return response("Updated", Response::HTTP_CREATED);
+        return response(new CategoryResource($category), Response::HTTP_CREATED);
     }
 
     /**

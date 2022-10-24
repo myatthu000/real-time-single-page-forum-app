@@ -10,6 +10,7 @@ import read from "../components/Forum/read";
 import create from "../components/Forum/create";
 // import askQuestion from "../components/Forum/askQuestion";
 import Logout from "../components/Login/Logout";
+import CreateCategory from "../components/category/CreateCategory";
 
 const routes = [
     { 
@@ -41,6 +42,12 @@ const routes = [
         path: '/logout', 
         component: Logout, 
     },
+    // Category Part
+    {
+        name:"category",
+        path: "/category",
+        component: CreateCategory,
+    }
 
 ]
 
