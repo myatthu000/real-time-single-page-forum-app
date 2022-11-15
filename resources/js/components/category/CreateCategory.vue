@@ -2,13 +2,21 @@
     <div>
         <div class="">
             <h2 class="my-5">Category Create</h2>
+            <v-alert v-if="errors" type="error" :value="true">
+                Please, Give Category name!
+                <!-- {{ this.errors.name[0] }} -->
+            </v-alert>
             <v-form @submit.prevent="submit">
                 <v-text-field v-model="form.name" label="Title" type="text"></v-text-field>
 
-                <v-btn v-if="editSlug" color="#90CA09" type="submit">
+                <v-btn 
+                :disabled="disabled"
+                v-if="editSlug" color="#90CA09" type="submit">
                     Update
                 </v-btn>
-                <v-btn v-else color="#90CAF9" type="submit">
+                <v-btn 
+                :disabled="disabled"
+                v-else color="#90CAF9" type="submit">
                     Create
                 </v-btn>
 
@@ -58,6 +66,7 @@ export default {
                 name: null,
                 // slug: null,
             },
+            errors:null,
             categories: {},
             editSlug: null,
         }
@@ -76,6 +85,7 @@ export default {
                     this.form = {};
                 })
                 .catch(error => {
+                    this.errors = error.response.data.errors
                     console.log(error.response.data)
                 })
         },
@@ -120,6 +130,11 @@ export default {
             .catch(error => {
                 console.log("Error -> ",error)
             });
+        }
+    },
+    computed: {
+        disabled() {
+            return !(this.form.name);
         }
     },
     created() {

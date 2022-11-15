@@ -4,7 +4,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Resources\NotificationResource;
+use App\Models\Reply;
+use App\Models\User;
+use App\Notifications\NewReplyNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +22,8 @@ Route::apiResource('/question',QuestionController::class);
 Route::apiResource("/category", CategoryController::class);
 Route::apiResource("/question/{question}/reply", ReplyController::class);
 
+Route::post('notifications',[NotificationController::class,'index']);
+Route::post('markAsRead',[NotificationController::class,'markAsRead']);
 
 Route::post('/like/{reply}', [LikeController::class,'likeIt']);
 Route::delete('/like/{reply}', [LikeController::class,'unlikeIt']);

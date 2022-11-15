@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DeleteReplyEvent as EventsDeleteReplyEvent;
 use App\Http\Resources\ReplyResource;
 use App\Models\Question;
 use App\Models\Reply;
+use App\Notifications\NewReplyNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class ReplyController extends Controller
@@ -45,7 +48,13 @@ class ReplyController extends Controller
      */
     public function store(Question $question,Request $request)
     {
+        $request["user_id"] = auth()->id();
         $reply = $question->replies()->create($request->all());
+        $user = $question->user;
+        // if($reply->user_id !== $question->user_id){
+
+            $user->notify(new NewReplyNotification($reply));
+        // }
         return response(['reply'=>new ReplyResource($reply)],Response::HTTP_CREATED);
     }
 
@@ -56,7 +65,7 @@ class ReplyController extends Controller
      * @param \App\Models\Reply $reply
      * @return ReplyResource
      */
-    public function show(Question $question,Reply $reply)
+    public function show(Reply $reply)
     {
         return new ReplyResource($reply);
     }
@@ -73,7 +82,7 @@ class ReplyController extends Controller
     public function update(Question $question,Request $request, Reply $reply)
     {
         $reply->update($request->all());
-        return response("Updated",Response::HTTP_ACCEPTED);
+        return response('reply update',Response::HTTP_ACCEPTED);
     }
 
     /**
@@ -85,7 +94,8 @@ class ReplyController extends Controller
      */
     public function destroy(Question $question,Reply $reply)
     {
-        $reply->deleteOrFail();
+        $reply->delete();
+        broadcast(new EventsDeleteReplyEvent($reply->id))->toOthers();
         return response(null,Response::HTTP_NO_CONTENT);
     }
 }

@@ -15,6 +15,10 @@ window.marked = marked;
 
 import User from "./components/Helpers/User";
 window.User = User
+
+import Exception from "./components/Helpers/Exception";
+window.Exception = Exception
+
 window.EventBus = new Vue();
 // console.log(User.hasToken());
 // console.log(User.loggedIn());

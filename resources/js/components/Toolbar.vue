@@ -1,22 +1,31 @@
 <template>
     <v-toolbar
-        elevation="4"
+        elevation="1"
     >
-        <v-toolbar-title>Forum App</v-toolbar-title>
+        <v-toolbar-title>
+            <router-link class="black--text" to="/">Forum</router-link>
+        </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
+        <AppNotification></AppNotification>
+
         <div class="hidden-sm-and-down">
-            <router-link
-                v-if='item.show'
-                v-for="item in items"
-                :key="item.title"
-                :to="item.to">
-                <v-btn text>{{item.title}}</v-btn>
-            </router-link>
+
+            <div>
+                <router-link
+                    v-if='item.show'
+                    v-for="item in items"
+                    :key="item.title"
+                    :to="item.to">
+                    <v-btn text>{{item.title}}</v-btn>
+                </router-link>
+            </div>
+
         </div>
 
-        <v-menu
+        <div class="d-xl-none d-lg-none d-md-none">
+            <v-menu
             left
             bottom
         >
@@ -32,21 +41,28 @@
 
             <v-list>
                 <v-list-item
-                    v-for="n in 5"
+                v-if='item.show'
+                    v-for="(item,n) in items"
                     :key="n"
-                    @click="() => {}"
-                >
-                    <v-list-item-title>Option {{ n }}</v-list-item-title>
+                    :to="item.to">
+                    <v-list-item-title>
+                        {{ item.title }}
+                    </v-list-item-title>
                 </v-list-item>
             </v-list>
         </v-menu>
+        </div>
     </v-toolbar>
 </template>
 
 <script>
 import User from './Helpers/User';
+import AppNotification from './AppNotification.vue';
 
     export default {
+        components: {
+            AppNotification,
+        },
         data() {
             return {
                 items: [

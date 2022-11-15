@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h3>Forum</h3>
+        <h3>
+            Forum
+        </h3>
         <v-container fluid grid-list-md>
             <v-layout row wrap>
                 <v-flex xs8>
